@@ -13,245 +13,170 @@ fexp$DATE <- as.Date(fexp$DATE)
 fexp$WEEK <- factor(fexp$WEEK)
 
 
-test_that("Q2 (visible)", {
+test_that("Q2 Names (visible)", {
   
-  expect_true(dim(rep1)[1] == 10)
-  expect_true(dim(rep1)[2] == 26)
-  expect_equal(rep1$DMA_ID[1], 501)
-  expect_equal(rep1$DMA_CONDITION[3], "3")
-  expect_equal(rep1$GOOGLE_RETARGETING_CLICKS[6], 11)
+  expect_true(dim(fexp2)[1] == 4410)
+  expect_true(dim(fexp2)[2] == 11)
+  expect_true(names(fexp2)[1] == "DATE")
+  expect_true(names(fexp2)[4] == "GP")
+  expect_true(names(fexp2)[9] == "WebSales")
+
+})
+
+test_that("Q2 Values (visible)", {
   
+  expect_equal(fexp2$GP[3], .85, tolerance = 1e-1)
+  expect_equal(fexp2$FR[10], 2.78, tolerance = 1e-1)
+  expect_equal(fexp2$POPN[1001], 74500, tolerance = 1e-1)
+  expect_equal(fexp2$GR[3333], 0, tolerance = 1e-1)
+  expect_equal(fexp2$FP[4300], 20.24, tolerance = 1e-1)
+
 })
 
 test_that("Q3 (visible)", {
   
-  expect_true(dim(rep1b)[1] == 10)
-  expect_true(dim(rep1b)[2] == 26)
-  expect_equal(rep1b$DMA_ID[2], 803)
-  expect_equal(rep1b$DMA_CONDITION[3], "18")
-  expect_equal(rep1b$GOOGLE_RETARGETING_CLICKS[6], 6)
-  
+  expect_equal(SpendTotals$GP_spend, 20517.62, tolerance = 1)
+  expect_equal(SpendTotals$GB_spend, 20655.67, tolerance = 1)
+  expect_equal(SpendTotals$FB_spend, 59727.54, tolerance = 1)
+
 })
 
-test_that("Q4a (visible)", {
+test_that("Q4 Structure (visible)", {
   
-  expect_true(names(fexp4)[27] == "Tot_Imp")
-  expect_equal(sum(fexp4$Tot_Imp), 13184393, tolerance = 10)
+  expect_true(dim(top10gp)[1] == 10)
+  expect_true(names(top10gp)[2] == "GP_spend")
               
 })
   
-test_that("Q4b (visible)", {
+test_that("Q4 Values (visible)", {
   
-  expect_true(names(fexp4)[28] == "Tot_Click")
-  expect_equal(sum(fexp4$Tot_Click), 66802, tolerance = 10)
+  expect_equal(top10gp$GP_spend[3], 849.19, tolerance = 1)
+  expect_equal(sum(top10gp$GP_spend), 7270.9, tolerance = 1)
   
 })
 
 test_that("Q5 (visible)", {
   
-  expect_true(names(fexp5)[29] == "CTR")
-  expect_equal(sum(fexp5$CTR), 1813.163, tolerance = 1)
+  expect_equal(top10gr$GR_spend[3], 1034.17, tolerance = 1)
+  expect_equal(sum(top10gr$GR_spend), 8581.76, tolerance = 1)
   
 })
 
 test_that("Q6 (visible)", {
   
-  expect_equal(rep2$WebSales, 285249.4, tolerance = 1) 
-  expect_equal(rep2$AmznSales, 12260.93, tolerance = 1) 
+  expect_equal(top10fp$FP_spend[3], 1194.42, tolerance = 1)
+  expect_equal(sum(top10fp$FP_spend), 12509.34, tolerance = 1)
   
 })
 
-test_that("Q7 (visible)", {
+test_that("Q7 Structure (visible)", {
   
-  expect_equal(as.numeric(rep2b$WEEK[2]), 2, tolerance = 1e-2) 
-  expect_equal(rep2b$WebSales[2], 97126.42, tolerance = 1) 
-  expect_equal(rep2b$AmznSales[3], 4130.85, tolerance = 1) 
-  
-})
-
-test_that("Q8 (visible)", {
-  
-  expect_equal(as.numeric(rep2c$WEEK[11]), 3) 
-  expect_equal(rep2c$WebSales[6], 14760.27, tolerance = 1) 
-  expect_equal(rep2c$AmznSales[13], 1325.37, tolerance = 1) 
+  expect_true(dim(top10spend)[1] == 10)
+  expect_true(dim(top10spend)[2] == 6)
+  expect_true(names(top10spend)[2] == "GP_spend")
+  expect_true(names(top10spend)[5] == "FP_spend")
   
 })
 
-test_that("Q9 (visible)", {
+test_that("Q7 GP_values (visible)", {
   
-  expect_true(dim(rep2c)[1] == 15)
-  expect_true(dim(rep2c)[2] == 5)
-  expect_true(names(rep2c)[5] == "PercAmzn")
-  expect_equal(rep2c$PercAmzn[3], .0723, tolerance = 1e-3) 
-  expect_equal(rep2c$PercAmzn[6], .0282, tolerance = 1e-3) 
-  expect_equal(rep2c$PercAmzn[13], .0363, tolerance = 1e-3) 
+  expect_equal(top10spend$GP_spend[4], 678.95, tolerance = 1) 
+  expect_equal(top10spend$GP_spend[9], 521.19, tolerance = 1) 
+  expect_equal(sum(top10spend$GP_spend), 7270.9, tolerance = 1) 
   
 })
 
-test_that("Q10 (visible)", {
+test_that("Q7 GR_values (visible)", {
   
-  expect_true(dim(rep2d)[1] == 15)
-  expect_true(dim(rep2d)[2] == 5)
-  expect_true(names(rep2d)[5] == "PercAmzn")
-  expect_equal(rep2d$PercAmzn[3], .0518, tolerance = 1e-3) 
-  expect_equal(rep2d$PercAmzn[6], .0597, tolerance = 1e-3) 
-  expect_equal(rep2d$PercAmzn[13], .0363, tolerance = 1e-3) 
+  expect_equal(top10spend$GR_spend[4], 688.21, tolerance = 1) 
+  expect_equal(top10spend$GR_spend[9], 626.26, tolerance = 1) 
+  expect_equal(sum(top10spend$GR_spend), 8024.4, tolerance = 1) 
   
 })
 
-Q12key <- ggplot(fexp, aes(x = AMAZON_US_SALES, y = SHOPIFY_US_SALES)) +
-  geom_point() +
-  scale_x_log10() +
-  scale_y_log10()
-
-test_that("Q12 (visible)", {
+test_that("Q7 Other_values (visible)", {
   
-  expect_equal(Q12p$layers[[1]], Q12key$layers[[1]])
-  expect_equal(Q12p$scales, Q12key$scales)
-  expect_equal(Q12p$mapping, Q12key$mapping)
-  expect_equal(Q12p$labels, Q12key$labels)
+  expect_equal(top10spend$FP_spend[4], 1194.42, tolerance = 1) 
+  expect_equal(top10spend$GB_spend[9], 277.93, tolerance = 1) 
+  expect_equal(sum(top10spend$GR_spend), 8024.4, tolerance = 1) 
   
 })
 
-Q13key <- fexp %>% 
-  filter(POPN > 500000) %>% 
-  group_by(WEEK, DMA_NAME) %>% 
-  summarize(WebSales = sum(SHOPIFY_US_SALES),
-            AmznSales = sum(AMAZON_US_SALES)) %>% 
-  ggplot(aes(x = AmznSales, y = WebSales)) +
-  geom_point() +
-  scale_x_log10() +
-  scale_y_log10()
-
-test_that("Q13 (visible)", {
+test_that("Q8 Structure (visible)", {
   
-  expect_equal(Q13p$layers[[1]], Q13key$layers[[1]])
-  expect_equal(Q13p$scales, Q13key$scales)
-  expect_equal(Q13p$mapping, Q13key$mapping)
-  expect_equal(Q13p$labels, Q13key$labels)
+  expect_true(dim(top25pcsales)[1] == 25)
+  expect_true(dim(top25pcsales)[2] == 2)
+  expect_true(names(top25pcsales)[1] == "DMA_NAME")
+  expect_true(names(top25pcsales)[2] == "PCSales")
   
 })
 
-Q14key <- fexp %>% 
-  filter(POPN > 500000) %>% 
-  group_by(WEEK, DMA_NAME) %>% 
-  summarize(WebSales = sum(SHOPIFY_US_SALES),
-            AmznSales = sum(AMAZON_US_SALES)) %>% 
-  ggplot(aes(x = AmznSales, y = WebSales, color = WEEK)) +
-  geom_point() +
-  scale_x_log10() +
-  scale_y_log10()
-
-test_that("Q14 (visible)", {
+test_that("Q8 Values (visible)", {
   
-  expect_equal(Q14p$layers[[1]], Q14key$layers[[1]])
-  expect_equal(Q14p$scales, Q14key$scales)
-  expect_equal(Q14p$mapping, Q14key$mapping)
-  expect_equal(Q14p$labels, Q14key$labels)
+  expect_equal(top25pcsales$PCSales[5], .002009428, tolerance = 1e-5) 
+  expect_equal(top25pcsales$PCSales[14], .00166192, tolerance = 1e-5) 
+  expect_equal(top25pcsales$PCSales[22], .00147231, tolerance = 1e-5) 
+
+})
+
+test_that("Q9 Structure (visible)", {
+  
+  expect_true(dim(top5days)[1] == 5)
+  expect_true(dim(top5days)[2] == 4)
+  expect_true(names(top5days)[1] == "DATE")
+  expect_true(names(top5days)[3] == "Total_Google_Spend")
   
 })
 
-Q15key <- fexp %>% 
-  filter(DMA_NAME == "New York, NY") %>% 
-  ggplot(aes(x = DATE, y = SHOPIFY_US_SALES)) +
-  geom_line()
-
-test_that("Q15 (visible)", {
+test_that("Q9 Values (visible)", {
   
-  expect_equal(Q15p$layers[[1]], Q15key$layers[[1]])
-  expect_equal(Q15p$scales, Q15key$scales)
-  expect_equal(Q15p$mapping, Q15key$mapping)
-  expect_equal(Q15p$labels, Q15key$labels)
+  expect_equal(top5days$Total_Ad_Spend[2], 7445.44, tolerance = 1) 
+  expect_equal(top5days$Total_Google_Spend[3], 3358.7, tolerance = 1) 
+  expect_equal(top5days$Total_Ad_Spend[5], 6964.08, tolerance = 1) 
+  expect_equal(top5days$Total_Facebook_Spend[4], 3902.59, tolerance = 1) 
   
 })
 
-Q16key <- fexp %>% 
-  filter(POPN > 2500000) %>% 
-  ggplot(aes(x = DATE, y = SHOPIFY_US_SALES, color = DMA_NAME)) +
-  geom_line()
-
-test_that("Q16 (visible)", {
+test_that("Q10 Structure (visible)", {
   
-  expect_equal(Q16p$layers[[1]], Q16key$layers[[1]])
-  expect_equal(Q16p$scales, Q16key$scales)
-  expect_equal(Q16p$mapping, Q16key$mapping)
-  expect_equal(Q16p$labels, Q16key$labels)
+  expect_true(dim(wksales)[1] == 9)
+  expect_true(dim(wksales)[2] == 3)
+  expect_true(names(wksales)[2] == "WEEK")
+  expect_true(names(wksales)[3] == "TotSales")
   
 })
 
-Q17key <- fexp %>% 
-  filter(POPN > 1300000) %>% 
-  ggplot(aes(x = DATE, y = SHOPIFY_US_SALES)) +
-  geom_line() +
-  facet_wrap(~ DMA_NAME)
-
-test_that("Q17 (visible)", {
+test_that("Q10 Values A (visible)", {
   
-  expect_equal(Q17p$layers[[1]], Q17key$layers[[1]])
-  expect_equal(Q17p$scales, Q17key$scales)
-  expect_equal(Q17p$mapping, Q17key$mapping)
-  expect_equal(Q17p$labels, Q17key$labels)
+  expect_equal(wksales$TotSales[2], 510.14, tolerance = 1) 
+  expect_equal(wksales$TotSales[3], 118.53, tolerance = 1) 
+  expect_equal(wksales$TotSales[5], 19.55, tolerance = 1) 
   
 })
 
-Q18key <- fexp %>% 
-  filter(POPN > 1300000) %>% 
-  group_by(DMA_NAME) %>% 
-  summarize(Tot_Sales = sum(SHOPIFY_US_SALES)) %>% 
-  ggplot(aes(x = DMA_NAME, y = Tot_Sales)) +
-  geom_col()
-
-test_that("Q18 (visible)", {
+test_that("Q10 Values B (visible)", {
   
-  expect_equal(Q18p$layers[[1]], Q18key$layers[[1]])
-  expect_equal(Q18p$scales, Q18key$scales)
-  expect_equal(Q18p$mapping, Q18key$mapping)
-  expect_equal(Q18p$labels, Q18key$labels)
+  expect_equal(wksales$TotSales[7], 893.78, tolerance = 1) 
+  expect_equal(wksales$TotSales[8], 692.05, tolerance = 1) 
+  expect_equal(wksales$TotSales[9], 1887.95, tolerance = 1) 
   
 })
 
-Q19key <- fexp %>% 
-  group_by(DMA_NAME) %>% 
-  summarize(Tot_Sales = sum(SHOPIFY_US_SALES)) %>% 
-  ggplot(aes(x = Tot_Sales)) +
-  geom_histogram()
-
-test_that("Q19 (visible)", {
+test_that("Q11 Structure (visible)", {
   
-  expect_equal(Q19p$layers[[1]], Q19key$layers[[1]])
-  expect_equal(Q19p$scales, Q19key$scales)
-  expect_equal(Q19p$mapping, Q19key$mapping)
-  expect_equal(Q19p$labels, Q19key$labels)
+  expect_true(dim(salesstats)[1] == 1)
+  expect_true(dim(salesstats)[2] == 4)
+  expect_true(names(salesstats)[2] == "Max")
+  expect_true(names(salesstats)[3] == "Medn")
   
 })
 
-Q20key <- fexp %>% 
-  group_by(DMA_NAME) %>% 
-  summarize(Tot_Sales = sum(SHOPIFY_US_SALES)) %>% 
-  ggplot(aes(x = Tot_Sales)) +
-  geom_histogram() +
-  scale_x_log10()
-
-test_that("Q20 (visible)", {
+test_that("Q11 Values (visible)", {
   
-  expect_equal(Q20p$layers[[1]], Q20key$layers[[1]])
-  expect_equal(Q20p$scales, Q20key$scales)
-  expect_equal(Q20p$mapping, Q20key$mapping)
-  expect_equal(Q20p$labels, Q20key$labels)
-  
-})
-
-Q21key <- fexp %>% 
-  filter(POPN > 2400000) %>% 
-  ggplot(aes(x = DMA_NAME, y = AMAZON_US_SALES)) +
-  geom_boxplot()
-
-test_that("Q21 (visible)", {
-  
-  expect_equal(Q21p$layers[[1]], Q21key$layers[[1]])
-  expect_equal(Q21p$scales, Q21key$scales)
-  expect_equal(Q21p$mapping, Q21key$mapping)
-  expect_equal(Q21p$labels, Q21key$labels)
-  
+  expect_equal(salesstats$Min, 0, tolerance = 1e-2) 
+  expect_equal(salesstats$Max, 39572.47, tolerance = 1) 
+  expect_equal(salesstats$Medn, 1131.575, tolerance = 1) 
+  expect_equal(salesstats$Mean, 2731.762, tolerance = 1) 
+ 
 })
 
