@@ -4,13 +4,13 @@ library(testthat)
 # each test represents one point value
 # you can have multiple tests for each question
 
-library(readxl)
-library(dplyr)
-library(ggplot2)
-fexp <- read_excel("FieldExperiment.xlsx")
-fexp <- data.frame(fexp)
-fexp$DATE <- as.Date(fexp$DATE)
-fexp$WEEK <- factor(fexp$WEEK)
+# library(readxl)
+# library(dplyr)
+# library(ggplot2)
+# fexpkey <- read_excel("FieldExperiment.xlsx")
+# fexpkey <- data.frame(fexpkey)
+# fexpkey$DATE <- as.Date(fexpkey$DATE)
+# fexpkey$WEEK <- factor(fexpkey$WEEK)
 
 
 test_that("Q2 Names (visible)", {
